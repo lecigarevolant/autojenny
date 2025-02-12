@@ -6,9 +6,9 @@ from autogen_core.models import ChatCompletionClient
 from pydantic import BaseModel
 from typing_extensions import Self
 
-from .... import EVENT_LOGGER_NAME, TRACE_LOGGER_NAME
-from ....base import ChatAgent, TerminationCondition
-from .._base_group_chat import BaseGroupChat
+from autogen_agentchat import EVENT_LOGGER_NAME, TRACE_LOGGER_NAME
+from autogen_agentchat.base import ChatAgent, TerminationCondition
+from autogen_agentchat.teams import BaseGroupChat
 from ._magentic_one_orchestrator_plus import MagenticOneOrchestratorPlus
 from ._prompts import ORCHESTRATOR_FINAL_ANSWER_PROMPT
 

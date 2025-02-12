@@ -12,9 +12,9 @@ from autogen_core.models import (
     UserMessage,
 )
 
-from .... import TRACE_LOGGER_NAME
-from ....base import Response, TerminationCondition
-from ....messages import (
+from autogen_agentchat import TRACE_LOGGER_NAME
+from autogen_agentchat.base import Response, TerminationCondition
+from autogen_agentchat.messages import (
     AgentEvent,
     ChatMessage,
     HandoffMessage,
@@ -25,10 +25,10 @@ from ....messages import (
     ToolCallRequestEvent,
     ToolCallSummaryMessage,
 )
-from ....state import MagenticOneOrchestratorState
-from ....utils import content_to_str, remove_images
-from .._base_group_chat_manager import BaseGroupChatManager
-from .._events import (
+from autogen_agentchat.state import MagenticOneOrchestratorState
+from autogen_agentchat.utils import content_to_str, remove_images
+from autogen_agentchat.teams._group_chat._base_group_chat_manager import BaseGroupChatManager
+from autogen_agentchat.teams._group_chat._events import (
     GroupChatAgentResponse,
     GroupChatMessage,
     GroupChatRequestPublish,

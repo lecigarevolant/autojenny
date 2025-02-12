@@ -5,8 +5,8 @@ import shutil
 
 from autogen_agentchat.agents import CodeExecutorAgent, UserProxyAgent
 from autogen_agentchat.base import ChatAgent
-from autogen_agentchat.teams._group_chat._magentic_one._magentic_one_group_chat_plus import MagenticOneGroupChatPlus
-from autogen_core import CancellationToken, AgentId, MessageContext, event, TypeSubscription
+from .._magentic_one_group_chat_plus import MagenticOneGroupChatPlus
+from autogen_core import CancellationToken, AgentId, MessageContext, event
 from autogen_core.models import ChatCompletionClient
 from autogen_agentchat.messages import (
     AgentEvent,
@@ -58,7 +58,7 @@ class OrchestratorSubscriber:
         if message.messages:
             # Combine all message contents for task
             self.task = " ".join(
-                [str(msg.content) for msg in message.messages if msg.content is not None])
+                [str(msg.content) for msg in message.messages if msg.content])
             print(f"Initial Task: {self.task}")
 
     @event
@@ -163,7 +163,7 @@ class MagenticOnePlus(MagenticOneGroupChatPlus):
         input_func: InputFuncType | None = None,
         work_dir: str = "./magentic_workspace",
         browser_data_dir: str | None = None,
-        web_surfer_config: dict = {},
+        web_surfer_config: dict = {},  # type: ignore
         docker_image: str = "python:3-slim"  # Allow custom Docker image
     ):
         # Store the clients as instance variables so we can access their configs
@@ -202,7 +202,7 @@ class MagenticOnePlus(MagenticOneGroupChatPlus):
             downloads_folder=downloads_folder,
             debug_dir=os.path.join(browser_data_dir, "debug"),
             browser_data_dir=browser_data_dir,
-            **web_surfer_config
+            **web_surfer_config  # type: ignore
         )
 
         coder = MagenticOneCoderAgent(
@@ -267,10 +267,10 @@ class MagenticOnePlus(MagenticOneGroupChatPlus):
 
         return self
 
-    async def __aexit__(self, exc_type, exc_val, exc_tb):
+    async def __aexit__(self, exc_type, exc_val, exc_tb): # type: ignore
         """Ensure proper cleanup of resources"""
         if hasattr(self, 'docker_executor'):
-            await self.docker_executor.__aexit__(exc_type, exc_val, exc_tb)
+            await self.docker_executor.__aexit__(exc_type, exc_val, exc_tb) # type: ignore
 
         # Clean up any agents that need cleanup
         for agent in self._participants:  # Access through parent class's protected member
