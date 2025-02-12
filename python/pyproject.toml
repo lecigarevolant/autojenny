@@ -43,6 +43,7 @@ autogen-test-utils = { workspace = true }
 autogenstudio = { workspace = true }
 component-schema-gen = { workspace = true }
 magentic-one-cli = { workspace = true }
+autojenny = { workspace = true }
 
 [tool.ruff]
 line-length = 120

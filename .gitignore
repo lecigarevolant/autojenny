@@ -199,3 +199,4 @@ artifacts
 
 # project data
 registry.json
+python/packages/autojenny/src/autojenny/config.yaml
